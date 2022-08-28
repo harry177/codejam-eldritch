@@ -1,0 +1,121 @@
+body {
+    width: 1440px;
+    height: 720px;
+    display: flex;
+    justify-content: space-between;
+    background: url('./assets/home.png') no-repeat;
+    background-size: 100%;
+}
+
+.container {
+    width: 450px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    z-index: 10;
+}
+
+.c-3 {
+    flex-direction: column;
+}
+
+.inner__container {
+    width: 450px;
+    height: 300px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.ancient {
+    width: 150px;
+    height: 200px;
+    margin-left: 20px;
+}
+
+.active {
+    border: 10px solid red;
+}
+
+.azathoth {
+    background: url('./assets/Ancients/Azathoth.png') no-repeat;
+    background-size: 100%;
+}
+
+.cthulthu {
+    background: url('./assets/Ancients/Cthulthu.png') no-repeat;
+    background-size: 100%;
+}
+
+.logsothoth {
+    background: url('./assets/Ancients/IogSothoth.png') no-repeat;
+    background-size: 100%;
+}
+
+.shubniggurath {
+    background: url('./assets/Ancients/ShubNiggurath.png') no-repeat;
+    background-size: 100%;
+}
+
+.difficulty {
+    width: 300px;
+    height: 70px;
+    font-size: 40px;
+    text-align: center;
+    padding: 10px;
+    background-color: aliceblue;
+}
+
+.counter {
+    width: 250px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: bisque;
+}
+
+.stage {
+    width: 240px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: 2px solid black;
+}
+
+.score {
+    width: 60px;
+    height: 60px;
+    border: 2px solid black;
+    border-radius: 5px;
+    color: white;
+}
+
+.green {
+    background-color: green;
+}
+
+.brown {
+    background-color: brown;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.underside {
+    width: 180px;
+    height: 230px;
+    background: url('./assets/mythicCardBackground.png') no-repeat;
+    background-size: 100%;
+}
+
+.cards {
+    width: 180px;
+    height: 230px;
+    background-color: aquamarine;
+    background-size: 100%;
+}
