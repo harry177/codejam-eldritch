@@ -9,6 +9,9 @@ let difficulty;
 
 
 let isAzathoth;
+let isCthulthu;
+let isLogsothoth;
+let isShubniggurath;
 
 
 // Stage forms
@@ -39,6 +42,9 @@ function shuffle() {
 let selectionGreen = [];   // формируем массивы карт под условия сложности
 let selectionBrown = [];
 let selectionBlue = [];
+
+let selectionGreenNormal = [];
+let selectionBrownNormal = [];
 
 if (difficulty === 'medium') {
     greenCards.forEach(elem => {
@@ -83,7 +89,63 @@ if (difficulty === 'medium') {
     if (elem.level !== 'easy') {
       selectionBlue.push(elem)
     }
-  })
+  });
+} else if (difficulty === 'elementary') {
+  blueCards.forEach(elem => {
+    if (elem.level === 'easy') {
+      selectionBlue.push(elem)
+    }
+  });
+  greenCards.forEach(elem => {
+    if (elem.level === 'easy') {
+      selectionGreen.push(elem)
+    } else if (elem.level === 'normal') {
+      selectionGreenNormal.push(elem)
+    }
+  });
+  brownCards.forEach(elem => {
+    if (elem.level === 'easy') {
+      selectionBrown.push(elem)
+    } else if (elem.level === 'normal') {
+      selectionBrownNormal.push(elem)
+    }
+  });
+  if (selectionBrown.length < oneBrownNumber+twoBrownNumber+threeBrownNumber) {
+    selectionBrownNormal.sort(() => Math.random() - 0.5);
+    selectionBrown = selectionBrown.concat(selectionBrownNormal.slice(0, (oneBrownNumber+twoBrownNumber+threeBrownNumber) - selectionBrown.length))
+  };
+  if (selectionGreen.length < oneGreenNumber+twoGreenNumber+threeGreenNumber) {
+    selectionGreenNormal.sort(() => Math.random() - 0.5);
+    selectionGreen = selectionGreen.concat(selectionGreenNormal.slice(0, (oneGreenNumber+twoGreenNumber+threeGreenNumber) - selectionGreen.length))
+  }
+} else if (difficulty === 'nightmare') {
+  blueCards.forEach(elem => {
+    if (elem.level === 'hard') {
+      selectionBlue.push(elem)
+    }
+  });
+  greenCards.forEach(elem => {
+    if (elem.level === 'hard') {
+      selectionGreen.push(elem)
+    } else if (elem.level === 'normal') {
+      selectionGreenNormal.push(elem)
+    }
+  });
+  brownCards.forEach(elem => {
+    if (elem.level === 'hard') {
+      selectionBrown.push(elem)
+    } else if (elem.level === 'normal') {
+      selectionBrownNormal.push(elem)
+    }
+  });
+  if (selectionBrown.length < oneBrownNumber+twoBrownNumber+threeBrownNumber) {
+    selectionBrownNormal.sort(() => Math.random() - 0.5);
+    selectionBrown = selectionBrown.concat(selectionBrownNormal.slice(0, (oneBrownNumber+twoBrownNumber+threeBrownNumber) - selectionBrown.length))
+  };
+  if (selectionGreen.length < oneGreenNumber+twoGreenNumber+threeGreenNumber) {
+    selectionGreenNormal.sort(() => Math.random() - 0.5);
+    selectionGreen = selectionGreen.concat(selectionGreenNormal.slice(0, (oneGreenNumber+twoGreenNumber+threeGreenNumber) - selectionGreen.length))
+  }
 }
 
 
@@ -131,11 +193,7 @@ console.log(gameStack);
 }
 
 
-const shuffleButton = document.querySelector('.shuffle');
-
-shuffleButton.addEventListener('click', function() {
-  shuffle();
-})
+alert ('1) Функция перетасовки карт активируется при выборе сложности (+ shuffle) \n 2) Выбор сложности доступен после выбора древнего.') ;
 
 
 
@@ -193,6 +251,11 @@ azathoth.addEventListener('click', function () {
     cthulthu.classList.remove('active');
     logsothoth.classList.remove('active');
     shubniggurath.classList.remove('active');
+
+    isAzathoth = true;
+    isCthulthu = false;
+    isLogsothoth = false;
+    isShubniggurath = false;
 });
 
 cthulthu.addEventListener('click', function() {
@@ -202,6 +265,11 @@ cthulthu.addEventListener('click', function() {
     azathoth.classList.remove('active');
     logsothoth.classList.remove('active');
     shubniggurath.classList.remove('active');
+
+    isAzathoth = false;
+    isCthulthu = true;
+    isLogsothoth = false;
+    isShubniggurath = false;
 });
     
 
@@ -212,6 +280,11 @@ logsothoth.addEventListener('click', function() {
     cthulthu.classList.remove('active');
     azathoth.classList.remove('active');
     shubniggurath.classList.remove('active');
+
+    isAzathoth = false;
+    isCthulthu = false;
+    isLogsothoth = true;
+    isShubniggurath = false;
 });
     
 
@@ -222,6 +295,11 @@ shubniggurath.addEventListener('click', function() {
     logsothoth.classList.remove('active');
     cthulthu.classList.remove('active');
     azathoth.classList.remove('active');
+
+    isAzathoth = false;
+    isCthulthu = false;
+    isLogsothoth = false;
+    isShubniggurath = true;
 });
 
 
@@ -235,6 +313,8 @@ const nightmare = document.querySelector('.nightmare');
 
 
 elementary.addEventListener ('click', function() {
+
+  if (isAzathoth == true || isCthulthu == true || isLogsothoth == true || isShubniggurath == true) {
   difficulty = 'elementary';
 
   elementary.classList.toggle('active');
@@ -242,9 +322,14 @@ elementary.addEventListener ('click', function() {
   medium.classList.remove('active');
   hard.classList.remove('active');
   nightmare.classList.remove('active');
+
+  shuffle();
+  }
 });
 
 easy.addEventListener ('click', function() {
+
+  if (isAzathoth == true || isCthulthu == true || isLogsothoth == true || isShubniggurath == true) {
   difficulty = 'easy';
 
   easy.classList.toggle('active');
@@ -254,9 +339,12 @@ easy.addEventListener ('click', function() {
   nightmare.classList.remove('active');
 
   shuffle();
+  }
 });
 
 medium.addEventListener ('click', function() {
+
+  if (isAzathoth == true || isCthulthu == true || isLogsothoth == true || isShubniggurath == true) {
   difficulty = 'medium';
 
   medium.classList.toggle('active');
@@ -266,9 +354,12 @@ medium.addEventListener ('click', function() {
   nightmare.classList.remove('active');
 
   shuffle();
+  }
 });
 
 hard.addEventListener ('click', function() {
+
+  if (isAzathoth == true || isCthulthu == true || isLogsothoth == true || isShubniggurath == true) {
   difficulty = 'hard';
 
   hard.classList.toggle('active');
@@ -278,9 +369,12 @@ hard.addEventListener ('click', function() {
   nightmare.classList.remove('active');
 
   shuffle();
+  }
 });
 
 nightmare.addEventListener ('click', function() {
+
+  if (isAzathoth == true || isCthulthu == true || isLogsothoth == true || isShubniggurath == true) {
   difficulty = 'nightmare';
 
   nightmare.classList.toggle('active');
@@ -288,6 +382,9 @@ nightmare.addEventListener ('click', function() {
   elementary.classList.remove('active');
   medium.classList.remove('active');
   hard.classList.remove('active');
+
+  shuffle();
+  }
 });
 
 
@@ -327,5 +424,15 @@ underside.addEventListener('click', function () {
   gameStack.pop();
   } else {
     cards.style.backgroundImage = '';
+    difficulty = undefined;
+    azathoth.classList.remove('active');
+    cthulthu.classList.remove('active');
+    logsothoth.classList.remove('active');
+    shubniggurath.classList.remove('active');
+    nightmare.classList.remove('active');
+    easy.classList.remove('active');
+    elementary.classList.remove('active');
+    medium.classList.remove('active');
+    hard.classList.remove('active');
   }
 })
